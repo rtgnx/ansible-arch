@@ -1,0 +1,15 @@
+---
+- name: Display Drivers
+  include: "display.yml"
+
+- name: Power Management
+  include: "pwrmgt.yml"
+
+- name: Networking
+  include: "network.yml"
+
+- name: Sound
+  include: "sound.yml"
+
+- name: AUR (YAY)
+  include: "aur.yml"

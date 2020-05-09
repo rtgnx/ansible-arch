@@ -1,0 +1,32 @@
+
+- name: Install development packages
+  pacman:
+    name: base-devel go
+    state: present
+
+- name: "Ensure {{BUILD_DIR}}"
+  file:
+    path: "{{BUILD_DIR}}"
+    state: directory
+    mode: g+ws
+    group: nobody
+
+
+- name: Download YAY
+  get_url:
+    url: https://github.com/Jguer/yay/releases/download/v9.4.6/yay_9.4.6_x86_64.tar.gz
+    dest: /tmp/build/yay.tar.gz
+
+- name: Extract yay.tar.gz
+  unarchive:
+    src: /tmp/build/yay.tar.gz
+    dest: /tmp/build/
+    mode: 755
+    remote_src: true
+
+- name: Copy yay
+  copy:
+    src: /tmp/build/yay_9.4.6_x86_64/yay
+    dest: /usr/bin/
+    mode: 755
+    remote_src: true

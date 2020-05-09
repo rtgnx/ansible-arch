@@ -1,0 +1,22 @@
+- name: Network interface names
+  copy:
+    src: "{{role_path}}/files/x280/10-network.rules"
+    dest: "/etc/udev/rules.d/10-network.rules"
+    mode: 0440
+  when: "{{ansible_hostname == 'x280'}}"
+
+- name: Network interface names (x200)
+  copy:
+    src: "{{role_path}}/files/x200/10-network.rules"
+    dest: "/etc/udev/rules.d/10-network.rules"
+    mode: 0440
+  when: "{{ansible_hostname == 'x200'}}"
+
+- name: Reload udev rules
+  shell: "udevadm control --reload-rules && udevadm trigger"
+
+- name: Enable sshd
+  systemd: name=sshd enabled=yes
+
+- name: Enable wifi
+  systemd: name=wpa_supplicant@wlan0 enabled=yes

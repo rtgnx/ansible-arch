@@ -1,0 +1,14 @@
+- name: Install Sound packages
+  pacman:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - alsa-utils
+      - alsa-plugins
+      - alsa-firmware
+      - pulseaudio
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
+      - pulseaudio-equalizer
+      - pulseaudio-jack
+      - pulseaudio-zeroconf

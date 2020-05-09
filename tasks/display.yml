@@ -1,0 +1,13 @@
+- name: Install Display Drivers
+  pacman:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - mesa
+      - xf86-video-intel
+      - vulkan-intel
+      - xdpyinfo
+      - xorg-xrandr
+      - xorg-server
+      - xorg-xinit
+      - xorg

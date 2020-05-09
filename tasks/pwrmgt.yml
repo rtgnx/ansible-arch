@@ -1,0 +1,20 @@
+# Power management
+
+- name: Install packages
+  pacman: "{{ packages }}"
+  vars:
+    packages:
+      - acpid
+      - acpi
+
+- name: Low battery rule
+  copy:
+    src: "{{role_path}}/files/99-lowbat.rules"
+    dest: "/etc/udev/rules.d/99-lowbat.rules"
+    mode: 0440
+
+- name: Reload udev rules
+  shell: "udevadm control --reload-rules && udevadm trigger"
+
+- name: Enable ACPID
+  systemd: name=acpid status=started enabled=yes
